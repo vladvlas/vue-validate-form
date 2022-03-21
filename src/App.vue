@@ -1,132 +1,246 @@
 <template>
   <div class="container">
     <form class="form">
-      <label for="">Фамилия*</label>
-      <input v-model.trim="form.secondName" placeholder="Введите фамилию" />
-      <span v-if="v$.form.secondName.$error">
-        {{v$.form.secondName.$errors[0].$message}}
-      </span>
+    <h1>Регистрация</h1>
+      
+      <div class="form-content">
+        <div class="form-section">
+        
+        <div class="form-param">
+          <label for="">Фамилия*</label>
+          <span v-if="v$.form.secondName.$error">
+          {{ v$.form.secondName.$errors[0].$message }}
+        </span>
+        <input
+          class="input"
+          v-model.trim="form.secondName"
+          placeholder="Введите фамилию"
+        />
+        </div>
 
-      <label for="">Имя*</label>
-      <input v-model.trim="form.name" placeholder="Введите имя" />
-      <span v-if="v$.form.name.$error">
-        {{v$.form.name.$errors[0].$message}}
-      </span>
+        <div class="form-param">
+          <label for="">Имя*</label>
+        <span v-if="v$.form.name.$error">
+          {{ v$.form.name.$errors[0].$message }}
+        </span>
+        <input
+          class="input"
+          v-model.trim="form.name"
+          placeholder="Введите имя"
+        />
+        </div>
+        
 
-      <label for="">Отчество</label>
-      <input v-model.trim="form.patronymic" placeholder="Введите имя" />
+        <div class="form-param">
+          <label for="">Отчество</label>
+        <input
+          class="input"
+          v-model.trim="form.patronymic"
+          placeholder="Введите отчество"
+        />
+        </div>
 
-      <label for="">Дата рождения*</label>
-      <input
-        v-model="form.birthday"
-        type="date"
-        timezone=""
-        placeholder="Введите имя"
-      />
-      <span v-if="v$.form.birthday.$error">
-        {{v$.form.birthday.$errors[0].$message}}
-      </span>
+        <div class="form-param">
+          <!-- Переделать -->
+        <label for="">Дата рождения*</label>
+        <input
+          class="input"
+          v-model="form.birthday"
+          type="date"
+        
+        />
+        <span v-if="v$.form.birthday.$error">
+          {{ v$.form.birthday.$errors[0].$message }}
+        </span>
+        </div>
 
-      <label for="">Номер телефона*</label>
-      <input
-        type="number"
-        v-model.trim="form.phone"
-      />
-      <span v-if="v$.form.phone.$error">
-        {{v$.form.phone.$errors[0].$message}}
-      </span>
+        <div class="form-param">
+        <label for="">Номер телефона*</label>
+        <span v-if="v$.form.phone.$error">
+          {{ v$.form.phone.$errors[0].$message }}
+        </span>
+        <input class="input" type="number" v-model.trim="form.phone" />
+        </div>
 
 
-      <label>Пол</label>
-      <input v-model.trim="form.sex" type="text" />
+        <div class="form-param">
+          <label>Пол</label>
+          <div class="form-check">
+            <input class="radio" value="male" type="radio" id="male" v-model="form.gendere">
+            <label>Мужчина</label>
+          </div>
+          <div class="form-check">
+            <input class="radio" value="female" type="radio" id="female" v-model="form.gendere">
+            <label>Женщина</label>
+          </div>
+        </div>
 
-      <label>Группа клиентов*</label>
-      <select multiple v-model="form.clientGroup">
-        <option
-          v-for="group in form.clientGroups"
-          :key="group.id"
-          :value="group.name"
-        >
-          {{ group.name }}
-        </option>
-      </select>
-      <span v-if="v$.form.clientGroup.$error">
-        {{v$.form.clientGroup.$errors[0].$message}}
-      </span>
+        
 
-      <label>Врач</label>
-      <select v-model="form.doctor">
-        <option
-          v-for="doctor in form.doctors"
-          :key="doctor.id"
-          :value="doctor.name"
-        >
-          {{ doctor.name }}
-        </option>
-      </select>
+        <div class="form-param">
+          <label>Группа клиентов*</label>
+        <span v-if="v$.form.clientGroup.$error">
+          {{ v$.form.clientGroup.$errors[0].$message }}
+        </span>
+        <select multiple v-model="form.clientGroup">
+          <option
+            v-for="group in form.clientGroups"
+            :key="group.id"
+            :value="group.name"
+          >
+            {{ group.name }}
+          </option>
+        </select>
+        </div>
+        
 
-      <label>Не отправлять смс</label>
-      <input type="checkbox" v-model="form.sendMessage" />
+        <div class="form-param">
+          <label>Врач</label>
+        <select v-model="form.doctor">
+          <option
+            v-for="doctor in form.doctors"
+            :key="doctor.id"
+            :value="doctor.name"
+          >
+            {{ doctor.name }}
+          </option>
+        </select>
+        </div>
 
-      <label for="">Индекс</label>
-      <input type="number" placeholder="Введите индекс" v-model.trim="form.index" />
+        <div class="form-param">
+          <div class="checkbox">
+          <label>Не отправлять смс</label>
+          <input class="input" type="checkbox" v-model="form.sendMessage" />
+        </div>
+      </div>
+        </div>
 
-      <label for="">Страна</label>
-      <input placeholder="Введите страну" v-model.trim="form.country" />
+      <div class="form-section">
+        <div class="form-param">
+          <label for="">Индекс</label>
+        <input
+          class="input"
+          type="number"
+          placeholder="Введите индекс"
+          v-model.trim="form.index"
+        />
+        </div>
 
-      <label for="">Область</label>
-      <input placeholder="Введите регион" v-model.trim="form.region" />
+        <div class="form-param">
+          <label for="">Страна</label>
+          <input
+            class="input"
+            placeholder="Введите страну"
+            v-model.trim="form.country"
+          />
+        </div>
 
-      <label for="">Город*</label>
-      <input placeholder="Введите город" v-model.trim="form.city" />
-      <span v-if="v$.form.city.$error">
-        {{v$.form.city.$errors[0].$message}}
-      </span>
+        <div class="form-param">
+          <label for="">Область</label>
+        <input
+          class="input"
+          placeholder="Введите регион"
+          v-model.trim="form.region"
+        />
+        </div>
 
-      <label for="">Улица</label>
-      <input placeholder="Введите улицу" v-model.trim="form.street" />
+        <div class="form-param">
+          <label for="">Город*</label>
+        <span v-if="v$.form.city.$error">
+          {{ v$.form.city.$errors[0].$message }}
+        </span>
+        <input
+          class="input"
+          placeholder="Введите город"
+          v-model.trim="form.city"
+        />
+        </div>
+        
 
-      <label for="">Дом</label>
-      <input placeholder="Введите номер дома" v-model.trim="form.house" />
+        <div class="form-param">
+          <label for="">Улица</label>
+        <input
+          class="input"
+          placeholder="Введите улицу"
+          v-model.trim="form.street"
+        />
+        </div>
 
-      <label>Тип документа*</label>
-      <select v-model="form.document">
-        <option
-          v-for="document in form.documents"
-          :key="document.name"
-          :value="document.name"
-        >
-          {{ document.name }}
-        </option>
-      </select>
-      <span v-if="v$.form.document.$error">
-        {{v$.form.document.$errors[0].$message}}
-      </span>
+        <div class="form-param">
+          <label for="">Дом</label>
+        <input
+          class="input"
+          placeholder="Введите номер дома"
+          v-model.trim="form.house"
+        />
+      </div>
+        </div>
 
-      <label for="">Серия</label>
-      <input
-        type="number"
-        v-model.trim="form.series"
-        placeholder="Введите серию паспорта"
-      />
+      <div class="form-section">
+        <div class="form-param">
+          <label>Тип документа*</label>
+        <span v-if="v$.form.document.$error">
+          {{ v$.form.document.$errors[0].$message }}
+        </span>
+        <select v-model="form.document">
+          <option
+            v-for="document in form.documents"
+            :key="document.name"
+            :value="document.name"
+          >
+            {{ document.name }}
+          </option>
+        </select>
+        </div>
+        
 
-      <label for="">Номер</label>
-      <input
-        type="number"
-        v-model.trim="form.number"
-        placeholder="Введите номер паспорта"
-      />
+        <div class="form-param">
+          <label for="">Серия</label>
+        <input
+          class="input"
+          type="number"
+          v-model.trim="form.series"
+          placeholder="Введите серию паспорта"
+        />
+        </div>
 
-      <label for="">Кем выдан</label>
-      <input v-model.trim="form.whoIssue" placeholder="Кем выдан" />
+        <div class="form-param">
+          <label for="">Номер</label>
+        <input
+          class="input"
+          type="number"
+          v-model.trim="form.number"
+          placeholder="Введите номер паспорта"
+        />
+        </div>
 
-      <label for="">Дата выдачи*</label>
-      <input type="date" v-model="form.dateIssue" placeholder="Дата выдачи" />
-      <span v-if="v$.form.dateIssue.$error">
-        {{v$.form.dateIssue.$errors[0].$message}}
-      </span>
+        <div class="form-param">
+          <label for="">Кем выдан</label>
+        <input
+          class="input"
+          v-model.trim="form.whoIssue"
+          placeholder="Кем выдан"
+        />
+        </div>
 
-      <button @click="register" type="button">Зарегестрироваться</button>
+        <div class="form-param">
+          <label for="">Дата выдачи*</label>
+        <span v-if="v$.form.dateIssue.$error">
+          {{ v$.form.dateIssue.$errors[0].$message }}
+        </span>
+        <input
+          class="input"
+          type="date"
+          v-model="form.dateIssue"
+          placeholder="Дата выдачи"
+        />
+        </div>
+        
+
+        <button @click="register" type="button">Зарегестрироваться</button>
+      </div>
+      </div>
+      
     </form>
   </div>
 </template>
@@ -145,7 +259,7 @@ export default {
         patronymic: "",
         birthday: "",
         phone: "",
-        sex: "",
+        gendere: "",
         clientGroup: [],
         clientGroups: [
           { name: "VIP", id: "1" },
@@ -182,10 +296,10 @@ export default {
     return {
       form: {
         secondName: {
-          //required: helpers.withMessage('Это обязательное поле', required)
+          required: helpers.withMessage('Это обязательное поле', required)
         },
         name: {
-          //required: helpers.withMessage('Это обязательное поле', required)
+          required: helpers.withMessage('Это обязательное поле', required)
         },
         birthday: {
           // required: helpers.withMessage('Это обязательное поле', required),
@@ -193,7 +307,7 @@ export default {
           //   (birthday) => {
           //   let bDate = new Date(birthday);
           //   let currentDate = new Date()
-          //   if (bDate > currentDate) {              
+          //   if (bDate > currentDate) {
           //     return false
           //   }
           //   else {
@@ -206,7 +320,7 @@ export default {
           // required: helpers.withMessage('Это обязательное поле', required),
           // minLength: helpers.withMessage('Номер должен содержать 11 цифр', minLength(11)),
           // maxLength: helpers.withMessage('Номер должен содержать 11 цифр', maxLength(11)),
-          // fchar: helpers.withMessage('Номер должен начинаться с 7', 
+          // fchar: helpers.withMessage('Номер должен начинаться с 7',
           //   (value) => {
           //   value = value[0];
           //   if (value == '7') {
@@ -231,7 +345,7 @@ export default {
           //   (birthday) => {
           //   let bDate = new Date(birthday);
           //   let currentDate = new Date()
-          //   if (bDate > currentDate) {              
+          //   if (bDate > currentDate) {
           //     return false
           //   }
           //   else {
@@ -239,7 +353,7 @@ export default {
           //   }
           // }
           // )
-        }
+        },
       },
     };
   },
@@ -258,17 +372,110 @@ export default {
 </script>
 
 <style>
+body {
+  background-color: #363740;
+}
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap");
+* {
+  font-family: "Mulish", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 .container {
   margin: 0 auto;
-  max-width: 1200px;
-  padding: 0 15px;
+  max-width: 1360px;
+  padding: 15px;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 40px;
 }
 label {
-  margin-top: 10px;
+  /* margin-top: 10px; */
+  margin-bottom: 5px;
+  align-items: left;
 }
 .form {
+  padding: 15px 15px;
+  max-width: 1360px;
+  width: 100%;
+  border: 1px solid #dfe0eb;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background: #ffffff;
+}
+.form-content {
+  display: flex;
+  /* flex-direction: column; */
+  /* align-items: center; */
+  align-items: start;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  
+  /* height: 90vh; */
+  
+}
+.form-section {
+  padding: 0 10px;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  flex-direction: column;
+}
+.form-param {
+  position: relative;
   display: flex;
   flex-direction: column;
+  padding: 5px;
+}
+input,
+select {
+  width: 300px;
+  margin-bottom: 10px;
+  padding: 10px 20px 10px;
+  border-radius: 8px;
+  border: 1px solid #dfe0eb;
+}
+.input {
+}
+option {
+}
+button {
+  margin-top: 14px;
+  border: none;
+  border-radius: 8px;
+  max-width: 160px;
+  width: 100%;
+  height: 48px;
+  background-color: #212121;
+  color: #fff;
+}
+.radio {
+  width: 30px;
+}
+.checkbox {
+  display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.checkbox label {
+  margin: 0;
+}
+.checkbox input {
+  width: 40px;
+  margin: 0px;
+}
+span {
+  color: red;
+  font-size: 12px;
+  position: absolute;
+  bottom: 0;
+}
+@media (max-width: 400px) {
+  input, select {
+    width: 240px;
+    padding: 10px 5px;
+  }
 }
 </style>
