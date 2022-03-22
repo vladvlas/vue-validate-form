@@ -1,246 +1,268 @@
 <template>
   <div class="container">
     <form class="form">
-    <h1>Регистрация</h1>
-      
+      <h1>Регистрация</h1>
+
       <div class="form-content">
         <div class="form-section">
-        
-        <div class="form-param">
-          <label for="">Фамилия*</label>
-          <span v-if="v$.form.secondName.$error">
-          {{ v$.form.secondName.$errors[0].$message }}
-        </span>
-        <input
-          class="input"
-          v-model.trim="form.secondName"
-          placeholder="Введите фамилию"
-        />
-        </div>
-
-        <div class="form-param">
-          <label for="">Имя*</label>
-        <span v-if="v$.form.name.$error">
-          {{ v$.form.name.$errors[0].$message }}
-        </span>
-        <input
-          class="input"
-          v-model.trim="form.name"
-          placeholder="Введите имя"
-        />
-        </div>
-        
-
-        <div class="form-param">
-          <label for="">Отчество</label>
-        <input
-          class="input"
-          v-model.trim="form.patronymic"
-          placeholder="Введите отчество"
-        />
-        </div>
-
-        <div class="form-param">
-          <!-- Переделать -->
-        <label for="">Дата рождения*</label>
-        <input
-          class="input"
-          v-model="form.birthday"
-          type="date"
-        
-        />
-        <span v-if="v$.form.birthday.$error">
-          {{ v$.form.birthday.$errors[0].$message }}
-        </span>
-        </div>
-
-        <div class="form-param">
-        <label for="">Номер телефона*</label>
-        <span v-if="v$.form.phone.$error">
-          {{ v$.form.phone.$errors[0].$message }}
-        </span>
-        <input class="input" type="number" v-model.trim="form.phone" />
-        </div>
-
-
-        <div class="form-param">
-          <label>Пол</label>
-          <div class="form-check">
-            <input class="radio" value="male" type="radio" id="male" v-model="form.gendere">
-            <label>Мужчина</label>
+          <div class="form-param">
+            <label for="">Фамилия*</label>
+            <span v-if="v$.form.secondName.$error">
+              {{ v$.form.secondName.$errors[0].$message }}
+            </span>
+            <input
+              class="input"
+              v-model.trim="form.secondName"
+              placeholder="Введите фамилию"
+            />
           </div>
-          <div class="form-check">
-            <input class="radio" value="female" type="radio" id="female" v-model="form.gendere">
-            <label>Женщина</label>
+
+          <div class="form-param">
+            <label for="">Имя*</label>
+            <span v-if="v$.form.name.$error">
+              {{ v$.form.name.$errors[0].$message }}
+            </span>
+            <input
+              class="input"
+              v-model.trim="form.name"
+              placeholder="Введите имя"
+            />
+          </div>
+
+          <div class="form-param">
+            <label for="">Отчество</label>
+            <input
+              class="input"
+              v-model.trim="form.patronymic"
+              placeholder="Введите отчество"
+            />
+          </div>
+
+          <div class="form-param">
+            <!-- Переделать -->
+            <label for="">Дата рождения*</label>
+            <input class="input" v-model="form.birthday" type="date" />
+            <span v-if="v$.form.birthday.$error">
+              {{ v$.form.birthday.$errors[0].$message }}
+            </span>
+          </div>
+
+          <div class="form-param">
+            <label for="">Номер телефона*</label>
+            <span v-if="v$.form.phone.$error">
+              {{ v$.form.phone.$errors[0].$message }}
+            </span>
+            <input class="input" type="number" v-model.trim="form.phone" />
+          </div>
+
+          <div class="form-param">
+            <label>Пол</label>
+            <div class="form-check">
+              <input
+                class="radio"
+                value="male"
+                type="radio"
+                id="male"
+                v-model="form.gendere"
+              />
+              <label>Мужчина</label>
+            </div>
+            <div class="form-check">
+              <input
+                class="radio"
+                value="female"
+                type="radio"
+                id="female"
+                v-model="form.gendere"
+              />
+              <label>Женщина</label>
+            </div>
+          </div>
+
+          <div class="form-param">
+            <label>Группа клиентов*</label>
+            <span v-if="v$.form.clientGroup.$error">
+              {{ v$.form.clientGroup.$errors[0].$message }}
+            </span>
+            <select multiple v-model="form.clientGroup">
+              <option
+                v-for="group in form.clientGroups"
+                :key="group.id"
+                :value="group.name"
+              >
+                {{ group.name }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-param">
+            <label>Врач</label>
+            <select v-model="form.doctor">
+              <option
+                v-for="doctor in form.doctors"
+                :key="doctor.id"
+                :value="doctor.name"
+              >
+                {{ doctor.name }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-param">
+            <div class="checkbox">
+              <label>Не отправлять смс</label>
+              <input class="input" type="checkbox" v-model="form.sendMessage" />
+            </div>
           </div>
         </div>
 
-        
+        <div class="form-section">
+          <div class="form-param">
+            <label for="">Индекс</label>
+            <input
+              class="input"
+              type="number"
+              placeholder="Введите индекс"
+              v-model.trim="form.index"
+            />
+          </div>
 
-        <div class="form-param">
-          <label>Группа клиентов*</label>
-        <span v-if="v$.form.clientGroup.$error">
-          {{ v$.form.clientGroup.$errors[0].$message }}
-        </span>
-        <select multiple v-model="form.clientGroup">
-          <option
-            v-for="group in form.clientGroups"
-            :key="group.id"
-            :value="group.name"
+          <div class="form-param">
+            <label for="">Страна</label>
+            <input
+              class="input"
+              placeholder="Введите страну"
+              v-model.trim="form.country"
+            />
+          </div>
+
+          <div class="form-param">
+            <label for="">Область</label>
+            <input
+              class="input"
+              placeholder="Введите регион"
+              v-model.trim="form.region"
+            />
+          </div>
+
+          <div class="form-param">
+            <label for="">Город*</label>
+            <span v-if="v$.form.city.$error">
+              {{ v$.form.city.$errors[0].$message }}
+            </span>
+            <input
+              class="input"
+              placeholder="Введите город"
+              v-model.trim="form.city"
+            />
+          </div>
+
+          <div class="form-param">
+            <label for="">Улица</label>
+            <input
+              class="input"
+              placeholder="Введите улицу"
+              v-model.trim="form.street"
+            />
+          </div>
+
+          <div class="form-param">
+            <label for="">Дом</label>
+            <input
+              class="input"
+              placeholder="Введите номер дома"
+              v-model.trim="form.house"
+            />
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-param">
+            <label>Тип документа*</label>
+            <span v-if="v$.form.document.$error">
+              {{ v$.form.document.$errors[0].$message }}
+            </span>
+            <select v-model="form.document">
+              <option
+                v-for="document in form.documents"
+                :key="document.name"
+                :value="document.name"
+              >
+                {{ document.name }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-param">
+            <label for="">Серия</label>
+            <input
+              class="input"
+              type="number"
+              v-model.trim="form.series"
+              placeholder="Введите серию паспорта"
+            />
+          </div>
+
+          <div class="form-param">
+            <label for="">Номер</label>
+            <input
+              class="input"
+              type="number"
+              v-model.trim="form.number"
+              placeholder="Введите номер паспорта"
+            />
+          </div>
+
+          <div class="form-param">
+            <label for="">Кем выдан</label>
+            <input
+              class="input"
+              v-model.trim="form.whoIssue"
+              placeholder="Кем выдан"
+            />
+          </div>
+
+          <div class="form-param">
+            <label for="">Дата выдачи*</label>
+            <span v-if="v$.form.dateIssue.$error">
+              {{ v$.form.dateIssue.$errors[0].$message }}
+            </span>
+            <input
+              class="input"
+              type="date"
+              v-model="form.dateIssue"
+              placeholder="Дата выдачи"
+            />
+          </div>
+
+          <button @click="register" type="button">Зарегестрироваться</button>
+        </div>
+      </div>
+
+      <!-- <div>
+        <label class="typo__label">Simple select / dropdown</label>
+        <multiselect
+          v-model="value"
+          :options="options"
+          :multiple="true"
+          :close-on-select="false"
+          :clear-on-select="false"
+          :preserve-search="true"
+          placeholder="Pick some"
+          label="name"
+          track-by="name"
+          :preselect-first="true"
+        >
+          <template slot="selection" slot-scope="{ values, isOpen }"
+            ><span
+              class="multiselect__single"
+              v-if="values.length &amp;&amp; !isOpen"
+              >{{ values.length }} options selected</span
+            ></template
           >
-            {{ group.name }}
-          </option>
-        </select>
-        </div>
-        
-
-        <div class="form-param">
-          <label>Врач</label>
-        <select v-model="form.doctor">
-          <option
-            v-for="doctor in form.doctors"
-            :key="doctor.id"
-            :value="doctor.name"
-          >
-            {{ doctor.name }}
-          </option>
-        </select>
-        </div>
-
-        <div class="form-param">
-          <div class="checkbox">
-          <label>Не отправлять смс</label>
-          <input class="input" type="checkbox" v-model="form.sendMessage" />
-        </div>
-      </div>
-        </div>
-
-      <div class="form-section">
-        <div class="form-param">
-          <label for="">Индекс</label>
-        <input
-          class="input"
-          type="number"
-          placeholder="Введите индекс"
-          v-model.trim="form.index"
-        />
-        </div>
-
-        <div class="form-param">
-          <label for="">Страна</label>
-          <input
-            class="input"
-            placeholder="Введите страну"
-            v-model.trim="form.country"
-          />
-        </div>
-
-        <div class="form-param">
-          <label for="">Область</label>
-        <input
-          class="input"
-          placeholder="Введите регион"
-          v-model.trim="form.region"
-        />
-        </div>
-
-        <div class="form-param">
-          <label for="">Город*</label>
-        <span v-if="v$.form.city.$error">
-          {{ v$.form.city.$errors[0].$message }}
-        </span>
-        <input
-          class="input"
-          placeholder="Введите город"
-          v-model.trim="form.city"
-        />
-        </div>
-        
-
-        <div class="form-param">
-          <label for="">Улица</label>
-        <input
-          class="input"
-          placeholder="Введите улицу"
-          v-model.trim="form.street"
-        />
-        </div>
-
-        <div class="form-param">
-          <label for="">Дом</label>
-        <input
-          class="input"
-          placeholder="Введите номер дома"
-          v-model.trim="form.house"
-        />
-      </div>
-        </div>
-
-      <div class="form-section">
-        <div class="form-param">
-          <label>Тип документа*</label>
-        <span v-if="v$.form.document.$error">
-          {{ v$.form.document.$errors[0].$message }}
-        </span>
-        <select v-model="form.document">
-          <option
-            v-for="document in form.documents"
-            :key="document.name"
-            :value="document.name"
-          >
-            {{ document.name }}
-          </option>
-        </select>
-        </div>
-        
-
-        <div class="form-param">
-          <label for="">Серия</label>
-        <input
-          class="input"
-          type="number"
-          v-model.trim="form.series"
-          placeholder="Введите серию паспорта"
-        />
-        </div>
-
-        <div class="form-param">
-          <label for="">Номер</label>
-        <input
-          class="input"
-          type="number"
-          v-model.trim="form.number"
-          placeholder="Введите номер паспорта"
-        />
-        </div>
-
-        <div class="form-param">
-          <label for="">Кем выдан</label>
-        <input
-          class="input"
-          v-model.trim="form.whoIssue"
-          placeholder="Кем выдан"
-        />
-        </div>
-
-        <div class="form-param">
-          <label for="">Дата выдачи*</label>
-        <span v-if="v$.form.dateIssue.$error">
-          {{ v$.form.dateIssue.$errors[0].$message }}
-        </span>
-        <input
-          class="input"
-          type="date"
-          v-model="form.dateIssue"
-          placeholder="Дата выдачи"
-        />
-        </div>
-        
-
-        <button @click="register" type="button">Зарегестрироваться</button>
-      </div>
-      </div>
-      
+        </multiselect>
+        <pre class="language-json"><code>{{ value  }}</code></pre>
+      </div> -->
     </form>
   </div>
 </template>
@@ -248,12 +270,29 @@
 <script>
 import useVuelidate from "@vuelidate/core";
 import { required, minLength, maxLength, helpers } from "@vuelidate/validators";
+import Multiselect from "vue-multiselect";
 
 export default {
+  components: {
+    Multiselect,
+  },
   data() {
     return {
       v$: useVuelidate(),
       form: {
+
+
+      //   value: [],
+      //   options: [
+      //   { name: 'Vue.js', language: 'JavaScript' },
+      //   { name: 'Adonis', language: 'JavaScript' },
+      //   { name: 'Rails', language: 'Ruby' },
+      //   { name: 'Sinatra', language: 'Ruby' },
+      //   { name: 'Laravel', language: 'PHP' },
+      //   { name: 'Phoenix', language: 'Elixir' }
+      // ],
+
+
         secondName: "",
         name: "",
         patronymic: "",
@@ -296,10 +335,10 @@ export default {
     return {
       form: {
         secondName: {
-          required: helpers.withMessage('Это обязательное поле', required)
+          //required: helpers.withMessage('Это обязательное поле', required)
         },
         name: {
-          required: helpers.withMessage('Это обязательное поле', required)
+          //required: helpers.withMessage('Это обязательное поле', required)
         },
         birthday: {
           // required: helpers.withMessage('Это обязательное поле', required),
@@ -412,9 +451,8 @@ label {
   align-items: start;
   justify-content: space-around;
   flex-wrap: wrap;
-  
+
   /* height: 90vh; */
-  
 }
 .form-section {
   padding: 0 10px;
@@ -473,7 +511,8 @@ span {
   bottom: 0;
 }
 @media (max-width: 400px) {
-  input, select {
+  input,
+  select {
     width: 240px;
     padding: 10px 5px;
   }
